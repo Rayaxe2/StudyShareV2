@@ -58,21 +58,10 @@
     }
 
     /*
-     echo $_POST['email'];
-
-    $sql = "INSERT INTO userdata VALUES" . "(" .
-        strval($_POST['email']) . "," . 
-        strval($_POST['username']) . "," . 
-        strval($_POST['pwd']) . 
-    ");";
-    
-    if(mysqli_query($con, $sql)) {
-        echo "<br/> User Created <br/>";
-    } 
-    else {
-        echo "<br/> Error creating Entry: " . mysqli_error($con) . "<br/>";
-    }
-
-    mysqli_close($con);
+    <script>
+            var ErrorSection = document.getElementById('RegisterError');
+            ErrorSection.style.color = 'red';
+            document.getElementById('psw-repeat').text = '$rePassword';
+    </script>
     */
 ?>
