@@ -66,10 +66,8 @@ body {
 
 /*Buttons*/
 .button {
-  position: absolute;
-  top: 50%;
+  width: 330px; 
   font-size: 70px;
-  display: inline-block;
   padding: 15px 25px;
 
   cursor: pointer;
