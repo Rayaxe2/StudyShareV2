@@ -6,10 +6,10 @@ console_log($_SESSION);
 $loginbtn;
 $registeredUserObj;
 
-if($_SESSION['logged_in'] == true){ //|| isset($_SESSION)
+if(isset($_SESSION['loggedIn'])){ //|| isset($_SESSION)
   $loginbtn = '<button class="btn" name="logout">Logout</button>';
   $registeredUserObj = new RegisteredUser;
-  $registeredUserObj->setUserName($_SESSION['userName']);
+  $registeredUserObj->setUserName($_SESSION['username']);
   $_SESSION['registeredUser'] = $registeredUserObj;
 }
 else{
@@ -17,9 +17,10 @@ else{
 }
 
 if(isset($_POST['logout'])){
-  $_SESSION['logged_in'] = false;
-  $_SESSION['userName'] = false;
-  $_SESSION['registeredUser'] = false;
+  session_start();
+  session_unset();
+  session_destroy();
+  console_log("Logged out");
   $loginbtn = '<button class="btn" name="login">Login/SignUp</button>';
 }
 

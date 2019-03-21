@@ -42,15 +42,20 @@
                     echo "ErrorSection.innerHTML += 'Error: The fields were filled in incorrectly';";
                     break;
             }
-            echo "document.getElementById('email').text = '$email';
-                document.getElementById('username').text = '$username';
-                document.getElementById('fname').text = '$firstname';
-                document.getElementById('sname').text = '$surename';
-                document.getElementById('psd').text = '$password';
-                document.getElementById('psw-repeat').text = '$rePassword';";
+            echo "document.getElementByName('email').value = '$email';
+                document.getElementByName('username').value = '$username';
+                document.getElementByName('fname').value = '$firstname';
+                document.getElementByName('sname').value = '$surename';
+                document.getElementByName('psd').value = '$password';
+                document.getElementByName('psw-repeat').value = '$rePassword';";
                 
         
         echo "</script>";
+
+        setcookie("username", $username, time() + (86400 * 30), "/"); 
+        setcookie("password", $password, time() + (86400 * 30), "/"); 
+        */
+
         }
         else {
             header("Location: ./index.html");

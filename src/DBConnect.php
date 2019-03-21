@@ -9,10 +9,10 @@
     echo  '<br/> Successfully selected database' ; 
      
 /*
-    $host   =   "dbprojects.eecs.qmul.ac.uk"  ;
-    $user   =   "rr309"  ;
-    $pass   =   "ZSG6VdknWBNXk"  ;
-    $db   =   "rr309"  ;
+    $host   =   ""  ;
+    $user   =   ""  ;
+    $pass   =   ""  ;
+    $db   =   ""  ;
      
     $link  =  mysql_connect ( $host ,  $user ,  $pass );
     if (! $link ) {
