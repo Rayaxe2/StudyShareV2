@@ -42,19 +42,32 @@
                     echo "ErrorSection.innerHTML += 'Error: The fields were filled in incorrectly';";
                     break;
             }
-            echo "document.getElementByName('email').value = '$email';
-                document.getElementByName('username').value = '$username';
-                document.getElementByName('fname').value = '$firstname';
-                document.getElementByName('sname').value = '$surename';
-                document.getElementByName('psd').value = '$password';
-                document.getElementByName('psw-repeat').value = '$rePassword';";
+
+            /*
+            echo "document.getElementById('Regemail').value = '$email';
+                document.getElementById('Regemail').style.borderColor = 'red';
+
+                document.getElementById('Regusername').value = '$username';
+                document.getElementById('Regusername').style.borderColor = 'red';
+
+                document.getElementById('Regfname').value = '$firstname';
+                document.getElementById('Regfname').style.borderColor = 'red';
+
+                document.getElementById('Regsname').value = '$surename';
+                document.getElementById('Regsname').style.borderColor = 'red';
+
+                document.getElementById('Regpsw').value = '$password';
+                document.getElementById('Regpsw').style.borderColor = 'red';
+
+                document.getElementById('Regpsw-repeat').value = '$rePassword';
+                document.getElementById('Regpsw-repeat').style.borderColor = 'red';";
+            */
                 
         
         echo "</script>";
 
-        setcookie("username", $username, time() + (86400 * 30), "/"); 
-        setcookie("password", $password, time() + (86400 * 30), "/"); 
-        */
+        //setcookie("username", $username, time() + (86400 * 30), "/"); 
+        //setcookie("password", $password, time() + (86400 * 30), "/"); 
 
         }
         else {
