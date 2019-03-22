@@ -35,6 +35,7 @@
                         $_SESSION['firstname'] = $row["firstname"];
                         $_SESSION['lastname'] = $row["surename"];
                         $_SESSION['email'] = $row["email"];
+                        $_SESSION['loggedIn'] = true;
                         $this->LogInOut(true);
                     return true;
                 }

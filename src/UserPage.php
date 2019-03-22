@@ -1,5 +1,8 @@
 <?php
+session_start();
+//$_SESSION['loggedIn'] = "a";
 echo "test";
+echo $_SESSION['loggedIn'];
   if(isset($_SESSION['loggedIn']) == false){
     //header("location: index.php");
     $Hi = isset($_SESSION['loggedIn']);
