@@ -1,6 +1,10 @@
 <?php
-  if(isset($_SESSION['loggedIn'])==false){
-    header("location: index.php");
+echo "test";
+  if(isset($_SESSION['loggedIn']) == false){
+    //header("location: index.php");
+    $Hi = isset($_SESSION['loggedIn']);
+    echo $Hi;
+    echo "Test 2";
   }
 ?>
 
@@ -28,7 +32,7 @@
       </div>
     </form>
 
-<div id="background" style="background-color:#F3F2F2;">
+<!-- <div id="background" style="background-color:#F3F2F2;">
   <div id="mainPanel" style="width:500px; height:100%; margin:auto; background-color:white;" >
     <h2 style="text-align:center">YOUR ACCOUNT</h2>
     <img src="DefaultProfilePic.png" alt="USER PROFILE PIC" align="middle" style="width:100%; height:100%; margin:auto; ">
@@ -56,7 +60,8 @@
       </tr>
     </h1>
   </table>
-
   </div>
 </div>
-
+</div> -->
+  </body>
+</html>
