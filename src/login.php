@@ -18,5 +18,7 @@
         var ErrorSection = document.getElementById('loginError');
         ErrorSection.innerHTML += 'Error: Incorrect username/password inputed';
         ErrorSection.style.color = 'red';
+        document.getElementById('loginUsername').value = '$username';
+        document.getElementById('loginPassword').value = '$password';
     </script>";
 ?>

@@ -43,7 +43,14 @@
                     break;
             }
 
-            /*
+            echo "document.getElementById('Regemail').value = '$email';
+                document.getElementById('Regusername').value = '$username';
+                document.getElementById('Regfname').value = '$firstname';
+                document.getElementById('Regsname').value = '$surename';
+                document.getElementById('Regpsw').value = '$password';
+                document.getElementById('Regpsw-repeat').value = '$rePassword';";
+
+            /*old version
             echo "document.getElementById('Regemail').value = '$email';
                 document.getElementById('Regemail').style.borderColor = 'red';
 
