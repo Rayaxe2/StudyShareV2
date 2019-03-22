@@ -14,14 +14,7 @@ class Guest {
     
         //Checks if account exists, true or false
         $LoginResults = $dataInterfaceObj->searchUser($userName,$password);
-        
-        //Implement later
-        if(true) {
-            return TRUE;
-        }
-        else{
-            return FALSE;
-        }
+        return  $LoginResults;
 
     }
 }
