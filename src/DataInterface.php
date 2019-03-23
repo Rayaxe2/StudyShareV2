@@ -25,7 +25,7 @@
         }
         
         public function searchUser($username, $password){
-            $Query = $this->makeQuery($this->conn, "SELECT * FROM Accounts WHERE username = '$username'");
+            $Query = $this->makeQuery("SELECT * FROM Accounts WHERE username = '$username'");
             $CheckQuery = mysqli_num_rows($Query);
             if($CheckQuery == 1) {
                 $row = mysqli_fetch_assoc($Query);
@@ -35,7 +35,6 @@
                         $_SESSION['firstname'] = $row["firstname"];
                         $_SESSION['lastname'] = $row["surename"];
                         $_SESSION['email'] = $row["email"];
-                        $_SESSION['loggedIn'] = true;
                         $this->LogInOut(true);
                     return true;
                 }
@@ -72,7 +71,7 @@
                 return 4;
             }
 
-            $sqlCheckUser = $this->makeQuery($this->conn, "SELECT * FROM Accounts;");
+            $sqlCheckUser = $this->makeQuery("SELECT * FROM Accounts;");
             if ($sqlCheckUser != NULL) {
 
                 $userExists = false;
@@ -93,7 +92,7 @@
             } 
             $sql =  "INSERT INTO Accounts (email,username,password,firstname,surename,userType) 
                     VALUES ('$email','$username', '$password', '$firstname', '$surename', '$userType');";
-            $this->makeQuery($this->conn,$sql);
+            $this->makeQuery($sql);
             return 0;
 
             //allocating user storage on server
@@ -142,8 +141,8 @@
 
 
         //Extra function -----------------------------------------------------------------//
-        public function makeQuery($connection, $Query){
-            $Q = mysqli_query($connection, $Query);
+        public function makeQuery($Query){
+            $Q = mysqli_query($this->conn, $Query);
             if($Q == False) {
                 $this->console_log("Error creating Entry");
                 echo mysqli_error($this->conn);

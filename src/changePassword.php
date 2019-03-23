@@ -42,19 +42,19 @@
                             <p>
                                 <label><b>Password</b></label>
                             </p>
-                            <input type="password" placeholder="Enter Password" name="psw" id="Regpsw" required>
+                            <input type="password" placeholder="Enter Password" name="psw" id="Newgpsw" required>
                             
                             <p>
                                 <label><b>Repeat Password</b></label>
                             </p>
-                            <input type="password" placeholder="Repeat Password" name="psw-repeat" id="Regpsw-repeat" required>
+                            <input type="password" placeholder="Repeat Password" name="psw-repeat" id="Newpsw-repeat" required>
                             <br/><br/>
 
                         
                             <tr>
                                 <td valign="bottom">
-                                <input class="btn" type="submit" id="signupbtn" name="rePassSubmit" value="submit"/>
-                                <p id = "RegisterError"></p>
+                                    <input class="btn" type="submit" id="signupbtn" name="rePassSubmit" value="submit"/>
+                                    <p id = "FormError"></p>
                                 </td>
                             </tr>
                         </td>

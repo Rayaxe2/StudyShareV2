@@ -73,6 +73,21 @@ class RegisteredUser{
         echo '<script>';
         echo 'console.log('. json_encode( $data ) .')';
         echo '</script>';
-    }   
+    }  
+    
+    function setPassword($newPass){
+        $dataInterfaceObj = DataInterface::getInstance();
+        $username = $_SESSION['username'];
+        $Query = "UPDATE Accounts SET password='$newPass' WHERE username='$username';";
+        $result = $dataInterfaceObj->makeQuery($Query);
+        if($result != NULL){
+            $this->console_log("Password sucessfully changed");
+            return true;
+        }
+        else{
+            $this->console_log("Error with changing password");
+            return false;
+        }
+    }
 }
 ?>
