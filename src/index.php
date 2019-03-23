@@ -10,7 +10,7 @@ $registeredUserObj;
 if(isset($_POST['logout'])){
   session_unset();
   session_destroy();
-  $loginbtn = '<button class="btn" name="login" id="loginbtn">logout</button>';
+  $loginbtn = '<button class="btn" name="logout" id="logoutbtn">logout</button>';
   $uploadBtn = "<a></a>"; 
   
   $_POST['logout'] = false;
@@ -33,7 +33,7 @@ include_once 'index.html';
   </script>";
 }
 else{
-  $loginbtn = '<button class="btn" name="login" id="loginbtn">logout</button>'; //if not logged in
+  $loginbtn = '<button class="btn" name="logout" id="logoutbtn">logout</button>'; //if not logged in
   $uploadBtn = "<a></a>"; 
 }
 
