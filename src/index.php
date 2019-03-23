@@ -21,7 +21,7 @@ if(isset($_POST['logout'])){
 
 if(isset($_SESSION['loggedIn'])){ 
   $loginbtn = '<button class="btn" name="logout" id="logoutbtn" style="width:250px;">logout</button>';
-  $UserIcon = '<a style="padding:3px;" href="./UserPage.php"><img src="UserIcon.png" width="50" height="50"/>';
+  $UserIcon = '<a style="padding:3px;" href="./UserPage.php"><img src="UserIcon.png" width="50" height="50"/></a>';
   //<button class="btn" name="login" id="loginbtn" style="width:250px;">Login/SignUp</button>';
   $registeredUserObj = new RegisteredUser;
   $registeredUserObj->setUserName($_SESSION['username']);
