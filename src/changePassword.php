@@ -20,7 +20,7 @@
       <ul>
         <li id="logo">Study Share</li>
         <li><a href="./index.html">Home</a></li>  
-        <li id="LoginButton" style="float:right"><button class="btn" name="logout" id="logoutbtn">logout</button></li>
+        <li id="LoginButton" style="float:right"><button class="btn" name="logout" id="logoutbtn" style="width:250px;">logout</button></li>
         <li id="Uploadbtn" style="float:right"></li>
       </ul>
     </div>
@@ -53,7 +53,7 @@
                         
                             <tr>
                                 <td valign="bottom">
-                                    <input class="btn" type="submit" id="signupbtn" name="rePassSubmit" value="submit"/>
+                                    <input class="btn" type="submit" id="signupbtn" name="rePassSubmit" value="submit" style="width:438.5px;"/>
                                     <p id = "FormError"></p>
                                 </td>
                             </tr>

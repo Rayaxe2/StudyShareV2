@@ -5,12 +5,14 @@ session_start();
 console_log($_SESSION);
 $loginbtn;
 $uploadBtn;
+$UserIcon;
 $registeredUserObj;
 
 if(isset($_POST['logout'])){
   session_unset();
   session_destroy();
-  $loginbtn = '<button class="btn" name="logout" id="logoutbtn">logout</button>';
+  $loginbtn = '<button class="btn" name="login" id="loginbtn" style="width:250px;">Login/SignUp</button>';
+  $UserIcon = '';
   $uploadBtn = "<a></a>"; 
   
   $_POST['logout'] = false;
@@ -18,7 +20,9 @@ if(isset($_POST['logout'])){
 }
 
 if(isset($_SESSION['loggedIn'])){ 
-  $loginbtn = '<button class="btn" name="logout" id="logoutbtn">Logout</button>';
+  $loginbtn = '<button class="btn" name="logout" id="logoutbtn" style="width:250px;">logout</button>';
+  $UserIcon = '<a style="padding:3px;" href="./UserPage.php"><img src="UserIcon.png" width="50" height="50"/>';
+  //<button class="btn" name="login" id="loginbtn" style="width:250px;">Login/SignUp</button>';
   $registeredUserObj = new RegisteredUser;
   $registeredUserObj->setUserName($_SESSION['username']);
   $_SESSION['registeredUser'] = $registeredUserObj;
@@ -30,10 +34,12 @@ include_once 'index.html';
     document.getElementById('loginbtn').remove;
     document.getElementById('LoginButton').innerHTML='$loginbtn';
     document.getElementById('Uploadbtn').innerHTML='$uploadBtn';
+    document.getElementById('UserPageIcon').innerHTML='$UserIcon';
   </script>";
 }
 else{
-  $loginbtn = '<button class="btn" name="logout" id="logoutbtn">logout</button>'; //if not logged in
+  $loginbtn = '<button class="btn" name="login" id="loginbtn" style="width:250px;">Login/SignUp</button>';
+  $UserIcon = '';
   $uploadBtn = "<a></a>"; 
 }
 

@@ -31,7 +31,7 @@
                 $row = mysqli_fetch_assoc($Query);
                 if($password == $row["password"]){
                         $_SESSION['username'] = $username;
-                        $_SESSION['userType'] = parse_str($row["userType"]);
+                        $_SESSION['userType'] = $row["userType"];
                         $_SESSION['firstname'] = $row["firstname"];
                         $_SESSION['lastname'] = $row["surename"];
                         $_SESSION['email'] = $row["email"];
