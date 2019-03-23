@@ -46,7 +46,6 @@ echo $_SESSION['loggedIn'];
           <td colspan="2" align="right"> 
             <div class="dropdown">
               <button class="dropbtn">Dropdown</button>
-
               <div class="dropdown-content">
                 <a href="#">Change password</a>
                 <!--<a href="#">Link 2</a>-->
