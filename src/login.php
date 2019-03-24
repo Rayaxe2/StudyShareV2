@@ -1,6 +1,9 @@
 <?php
-    session_start();
-    include 'Guest.php';
+    include_once 'Guest.php';
+    
+    if(isset($_SESSION) == false){
+        session_start();
+    }
 
     if(isset($_SESSION['loggedIn'])){
         header("Location: ./index.php");

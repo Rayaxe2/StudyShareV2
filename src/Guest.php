@@ -1,9 +1,8 @@
 <?php 
-include 'DataInterface.php';
+include_once 'DataInterface.php';
 class Guest {
     public function register($email, $username, $password, $firstname, $surename, $userType, $rePassword) {
         $dataInterfaceObj = DataInterface::getInstance();
-        $con = $dataInterfaceObj->getConnection();
         return $dataInterfaceObj->storeNewUser($email, $username, $password, $firstname, $surename, $userType, $rePassword); 
     }
     
@@ -13,7 +12,6 @@ class Guest {
         //Checks if account exists, true or false
         $LoginResults = $dataInterfaceObj->searchUser($username, $password);
         return  $LoginResults;
-
     }
 }
 ?>

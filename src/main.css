@@ -280,5 +280,13 @@ span.psw {
   background-color: #3e8e41;
 }
 
+.large-grid-item{
+  background-color: rgba(255, 255, 255, 0.96);
+  border: 6px solid rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+
 
 

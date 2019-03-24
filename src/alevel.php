@@ -20,7 +20,7 @@
       <div class="navbar">
         <ul>
           <li id="logo">Study Share</li>
-          <li><a href="./NavBarState.php">Home</a></li>  
+          <li><a href="index.php">Home</a></li>  
           <li id="UserPageIcon" style="float:right;"></a></li>
           <li id="LoginButton" style="float:right"><button class="btn" name="login" id="loginbtn" style="width:250px;">Login/SignUp</button></li>
           <li id="Uploadbtn" style="float:right"></li>
@@ -28,19 +28,15 @@
       </div>
     </form>
     
-    </div>Alegbra
-    upvote stuff
-    View Post
     <div class="edutitle">
       <p>GCSE</p>
     </div>
+
     <div class="subBody"></div>
 
     <div class="ques">
       <p class="">A Level posts</p>
     </div>
-  <body>
-</html>
 
 <?php
   include_once "NavBarState.php";

@@ -118,13 +118,13 @@
             $this->makeQuery($sql);
 
             //Creates a path for allocating user storage on server - with a GCSE and A-level folder for each user
-            $pathnameAlevel = $_SERVER['DOCUMENT_ROOT'] . '/Study-Share/src/users/' .$username . '/A-Level';
-            $pathnameGCSE = $_SERVER['DOCUMENT_ROOT'] . '/Study-Share/src/users/' .$username . '/GCSE';
+            $pathnameAlevel = $_SERVER['DOCUMENT_ROOT'] . '/Study_Share_v2/src/users/' .$username . '/A-Level';
+            $pathnameGCSE = $_SERVER['DOCUMENT_ROOT'] . '/Study_Share_v2/src/users/' .$username . '/GCSE';
             $this->console_log($pathnameAlevel);
             $this->console_log($pathnameGCSE);
 
             //creates a folder in the server in the previously specified path for the specific user
-            if(mkdir($pathnameAlevel,0777,true) && mkdir($pathnameGCSE,0777,true)){
+            if((mkdir($pathnameAlevel,0777,true)) && (mkdir($pathnameGCSE,0777,true))){
                 $this->console_log("sucessful");
             }
             else{
@@ -154,6 +154,8 @@
             $postID = mysqli_insert_id($this->conn);
             //The file name is appended to the path to give the completelocation of the file rather than it's directory 
             $updatedPath = $path . '/' . $postID .'/' . $fileName;
+            $this->console_log("Log!");
+            $this->console_log($updatedPath);
             $sqlUpdatePath = "UPDATE Posts SET path = '$updatedPath' WHERE postID = '$postID'";
             $this->makeQuery($sqlUpdatePath);
             return $postID;
@@ -171,6 +173,8 @@
 
         //Carries out query but also prints error messages for debuging purposes
         public function makeQuery($Query){
+            $this->console_log("Seocnd Log here");
+            $this->console_log($Query);
             $Q = mysqli_query($this->conn, $Query);
             if($Q == False) {
                 $this->console_log("Error creating Entry");
@@ -222,7 +226,7 @@
         public function getUserID($username){
             $sql = mysqli_query($this->conn, "SELECT * FROM Accounts WHERE username = '$username'");
             $row = mysqli_fetch_array($sql);
-            $userID = $row['userID'];
+            $userID = $row['UserID'];
             return $userID;
         }
     }

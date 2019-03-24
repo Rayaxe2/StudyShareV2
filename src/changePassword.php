@@ -1,5 +1,5 @@
 <?php
-  include 'CheckLogin.php';
+  include_once 'CheckLogin.php';
 ?>
 
 <!DOCTYPE html>

@@ -1,5 +1,5 @@
 <?php
-  include 'CheckLogin.php';
+  include_once 'CheckLogin.php';
 ?>
 
 <!DOCTYPE html>
@@ -62,6 +62,7 @@
             </table>
         </div>
 
+        <!--
         <div class="UserPageDiv" style="padding-top: 20px;">
           <div class="PostGrid" style="box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);">
               <div class="grid-item">1</div>
@@ -69,6 +70,7 @@
               <div class="grid-item">3</div>  
           </div>
         </div>
+        -->
     </center>
 </body>
 </html>

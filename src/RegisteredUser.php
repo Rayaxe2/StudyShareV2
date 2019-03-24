@@ -1,22 +1,24 @@
 <?php
-include 'Document.php';
-include 'DataInterface.php';
-include 'Post.php';
+include_once 'Document.php';
+include_once 'DataInterface.php';
+include_once 'Post.php';
+
 
 class RegisteredUser{
     private $userid;
     private $username;
-    private $name;
-    private $isAdmin;
+    private $firstname;
+    private $surename;
+    private $userType;
     private $dataInterfaceObj;
 
     public function __constructor(){
         $this->dataInterfaceObj = DataInterface::getInstance();
     }
 
-    public function createNewPost($file_name,$file_size,$file_type,$file_tmp,$postTitle,$eduLevel,$subject){
-        console_log($eduLevel);
-        $fileObj = new Document($file_name,$file_size,$file_type,$file_tmp,$this->username);
+    public function createNewPost($file_name, $file_size, $file_type, $file_tmp, $postTitle, $eduLevel, $subject){
+        $this->console_log($eduLevel);
+        $fileObj = new Document($file_name, $file_size, $file_type, $file_tmp, $this->username);
         $targetDir = $_SERVER['DOCUMENT_ROOT'] . '/Study_Share_v2/src/users/' . $fileObj->getDocumentOwner();
         $targetFile = $targetDir;
 
@@ -39,24 +41,23 @@ class RegisteredUser{
         $postObj->setSubject($subject);
         $postObj->setEducationLevel($eduLevel);
 
-        console_log($targetFile);
+        $this->console_log($targetFile);
 
-        $oldmask = umask(0);
-        if(mkdir($targetFile,0777,true)){
-            console_log("file made");
+        if(mkdir($targetFile)){
+            $this->console_log("file made");
         }
         else{
-            console_log("file not made");
+            $this->console_log("file not made");
         }
-        umask($oldmask);
 
         $targetFile = $targetFile . '/' . $fileObj->getFileName();
         if(move_uploaded_file($fileObj->getFileTmp(),$targetFile)){
-            console_log("sucessful upload");
+            $this->console_log("sucessful upload");
         }
         else{
-            console_log("did not upload");
+            $this->console_log("did not upload");
         }
+        $this->console_log($fileObj->getFileTmp());
     
     }
 
@@ -68,7 +69,7 @@ class RegisteredUser{
         return $this->username;
     }
 
-    function console_log( $data ){
+    public function console_log( $data ){
         echo '<script>';
         echo 'console.log('. json_encode( $data ) .')';
         echo '</script>';

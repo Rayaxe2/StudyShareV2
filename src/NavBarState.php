@@ -5,7 +5,6 @@
     session_start();
   }
 
-  console_log($_SESSION);
   $loginbtn;
   $uploadBtn;
   $UserIcon;
@@ -19,17 +18,17 @@
     $uploadBtn = "<a></a>"; 
     
     $_POST['logout'] = false;
-    console_log("Loggin button selected");
   }
   
   if(isset($_SESSION['loggedIn'])){ 
     $loginbtn = '<button class="btn" name="logout" id="logoutbtn" style="width:250px;">logout</button>';
     $UserIcon = '<a style="padding:3px;" href="./UserPage.php"><img src="UserIcon.png" width="50" height="50"/></a>';
     $registeredUserObj = new RegisteredUser;
+
     $registeredUserObj->setUserName($_SESSION['username']);
-    $_SESSION['registeredUser'] = $registeredUserObj;
+    $registeredUserSerialize = serialize($registeredUserObj);
+    $_SESSION['registeredUser'] = $registeredUserSerialize;
     $uploadBtn = "<a href=addpost.html>Upload Notes</a>"; 
-    console_log("Logged out button selected");
   
     echo "<script>
       document.getElementById('loginbtn').remove;
@@ -48,10 +47,5 @@
   if(isset($_POST['login']) && (isset($_SESSION['loggedIn'])==false)){
     header("location: login.php");
   }
-  
-  function console_log( $data ){
-    echo '<script>';
-    echo 'console.log('. json_encode( $data ) .')';
-    echo '</script>';
-  }  
+
 ?>

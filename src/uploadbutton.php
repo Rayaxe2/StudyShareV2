@@ -1,6 +1,5 @@
 <?php 
-include 'Document.php';
-//include 'RegisteredUser.php';
+include_once 'Document.php';
 
 if(isset($_FILES['uploadfile']))
 {
@@ -15,16 +14,7 @@ if(isset($_FILES['uploadfile']))
 }
 
 function upload($file_name,$file_size,$file_type,$file_tmp,$postTitle,$subject){
-    $userName = "johniscool";
-    /*
-    console_log($file_name);
-    console_log($file_size);
-    console_log($file_type);
-    console_log($file_tmp);
-    console_log($postTitle);
-    console_log($subject);
-    */
-    
+    $userName = "johniscool"; 
 
     $fileObj = new Document($file_name,$file_size,$file_type,$file_tmp,$postTitle,$subject,$userName);
 

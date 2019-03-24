@@ -1,5 +1,5 @@
 <?php
-    include 'Guest.php';
+    include_once 'Guest.php';
     
     if (!empty($_POST)) {
         $email = $_POST['email'];

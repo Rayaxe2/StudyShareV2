@@ -1,5 +1,5 @@
 <?php
-include 'DataInterface.php';
+include_once 'DataInterface.php';
 
 $dataInterfaceObj = DataInterface::getInstance();
 $posts = $dataInterfaceObj->getGCSEPosts();
@@ -9,8 +9,9 @@ function console_log( $data ){
     echo 'console.log('. json_encode( $data ) .')';
     echo '</script>';
 }
+?>
 
-echo '<!DOCTYPE html>
+<!DOCTYPE html>
 <html class="no-js">
   <!--<![endif]-->
   <head>
@@ -21,36 +22,40 @@ echo '<!DOCTYPE html>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="main.css" />
   </head>
+
   <body>
-    <div class="navbar">
-      <ul>
-        <li id="logo">Study Share</li>
-        <li><a href="./index.html">Home</a></li>
-        <li style="float:right"><a href="./login.html">Login/SignUp</a></li>
-        <li style="float:right"><a href="./addpost.html">Upload Notes</a></li>
-      </ul>
-    </div>Alegbra
-    upvote stuff
-    View Post
-    <div class="edutitle">
-      <p>GCSE</p>
-    </div>
-    <div class="subBody"></div>
-
-    <!--div class="card">
-      <div class="cardcontainer">
-        <a href="">Maths</a>
+  <form action="index.php" method="post">
+      <div class="navbar">
+        <ul>
+          <li id="logo">Study Share</li>
+          <li><a href="index.php">Home</a></li>  
+          <li id="UserPageIcon" style="float:right;"></a></li>
+          <li id="LoginButton" style="float:right"><button class="btn" name="login" id="loginbtn" style="width:250px;">Login/SignUp</button></li>
+          <li id="Uploadbtn" style="float:right"></li>
+        </ul>
       </div>
-    </div-->
+    </form>
+      
+      <div class="edutitle">
+        <p>GCSE</p>
+      </div>
+      <div class="subBody"></div>
 
-    <div class="ques">
-      <p class="">GCSE posts</p>
-    </div>
-';
+      <!--div class="card">
+        <div class="cardcontainer">
+          <a href="">Maths</a>
+        </div>
+      </div-->
 
-echo '
-    <div class="UserPageDiv" style="padding-top: 20px;">';
+      <div class="ques">
+        <p class="">GCSE posts</+p>
+      </div>
+
+<?php
+include_once 'NavBarState.php';
+echo '<div class="UserPageDiv" style="padding-top: 20px;">';
     while($rows = mysqli_fetch_array($posts)) {
+        console_log($rows['path']);
         echo'<div class="large-grid-item"><table><tr><td>'.$rows["title"].'</td></tr>
         <tr><td>upvote stuff</td></tr>
         <tr><td>';
@@ -58,6 +63,5 @@ echo '
         echo '</td></tr></table></div>';
 
     }
-
   echo '</body></html>';
-//include_once 'gcse.html';
+?>
