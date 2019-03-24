@@ -5,7 +5,7 @@ include 'Post.php';
 
 class RegisteredUser{
     private $userid;
-    private $userName;
+    private $username;
     private $name;
     private $isAdmin;
     private $dataInterfaceObj;
@@ -16,7 +16,7 @@ class RegisteredUser{
 
     public function createNewPost($file_name,$file_size,$file_type,$file_tmp,$postTitle,$eduLevel,$subject){
         console_log("works");
-        $fileObj = new Document($file_name,$file_size,$file_type,$file_tmp,$userName);
+        $fileObj = new Document($file_name,$file_size,$file_type,$file_tmp,$username);
 
     $targetDir = $_SERVER['DOCUMENT_ROOT'] . '/Study-Share/src/users/' . $fileObj->getDocumentOwner();
     $targetFile = $targetDir;
@@ -30,7 +30,7 @@ class RegisteredUser{
     
     //$targetFile = $targetFile.'/'.$fileObj->getFileName();
     $dataInterfaceObj = DataInterface::getInstance();
-    $userID = $dataInterfaceObj->getUserID($userName);
+    $userID = $dataInterfaceObj->getUserID($username);
     $postID = $dataInterfaceObj->storePost($postTitle,$subject,$userID,$eduLevel,$targetFile);
 
     $targetFile = $targetFile .'/' . $postID;
@@ -62,11 +62,11 @@ class RegisteredUser{
     }
 
     public function setUserName($value){
-        $this->userName = $value;
+        $this->username = $value;
     }
 
     public function getUserName(){
-        return $this->userName;
+        return $this->username;
     }
 
     function console_log( $data ){

@@ -6,7 +6,6 @@ if($_SESSION['logged_in'] == false){
   echo 'alert("Before you can upload notes, you need to login!");';
   echo "window.location.replace('login.php')";
   echo '</script>';
-  
 }
 
 if(isset($_FILES['fileToUpload']))
@@ -24,7 +23,7 @@ if(isset($_FILES['fileToUpload']))
 }
 
 function upload($file_name,$file_size,$file_type,$file_tmp,$postTitle,$eduLevel,$subject){
-    $userName = $_SESSION['userName'];
+    $username = $_SESSION['username'];
     $registeredUserObj = $_SESSION['registeredUser'];
     $registeredUserObj->createNewPost($file_name,$file_size,$file_type,$file_tmp,$postTitle,$eduLevel,$subject);
 

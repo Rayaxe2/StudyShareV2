@@ -1,22 +1,29 @@
 <?php
     class DataInterface {
+        //Instance of database controle class
         private static $DInstance = null;
 
+        //Information for user to establish a connection with the database
         private $servername = "localhost";
         private $dbuser = "root";
         private $dbpassword = "";
         private $dbname = "studysharedb1";
 
+        //Database connection
         private $conn;
         
+        //Constructor - private, so can only be accessed within the class (singleton)
         private function __construct(){
+            //Establishes connection
             $this->conn = mysqli_connect($this->servername, $this->dbuser, $this->dbpassword, $this->dbname);
+            //If no connection could be made then an error is shown and the program stops
             if (mysqli_connect_errno()){
                 $this->console_log("Failed to connect to MySQL: " . mysqli_connect_error());
                 die("DB Error: please try again later"); 
             }
         }
-
+        
+        //This enables singleton by returning an existing instance or creating a new one if there isn't one
         public static function getInstance(){
             if (self::$DInstance == null){
                 self::$DInstance = new DataInterface();
@@ -24,9 +31,13 @@
             return self::$DInstance;
         }
         
+        //Searches for a username in the database and check to see if the password matches to be able to log the user in
         public function searchUser($username, $password){
-            $Query = $this->makeQuery("SELECT * FROM Accounts WHERE username = '$username'");
+            //The username feild is a primary key in the table 
+            //so there is no need to search more than 1 record from the returned results of this SQL query - only 1 is returned
+            $Query = $this->makeQuery("SELECT * FROM Accounts WHERE username = '$username';");
             $CheckQuery = mysqli_num_rows($Query);
+            //Given that the user exists a session is create with the userinformation retrieved from the DB fo later use
             if($CheckQuery == 1) {
                 $row = mysqli_fetch_assoc($Query);
                 if($password == $row["password"]){
@@ -38,8 +49,10 @@
                         $this->LogInOut(true);
                     return true;
                 }
+            //The following 2 else statements return a console message (for debuging purposes) 
+            //Which indicate if the username doesn't exist or if the password didn't match the entry
+            //However the user is not told which is the case as it's unecessary and poses secuirity issues
                 else {
-                    echo parse_str($row['username']);
                     $this->console_log("User found, HOWEVER, password wrong");
                     return false;
                 }
@@ -50,97 +63,110 @@
             }
         }   
 
+        //Stores a new user's information to offacially register them into the system
         public function storeNewUser($email, $username, $password, $firstname, $surename, $userType, $rePassword){
+        //These check to see if the imformation submited from the form is valid and if they aren't a number is retured that
+        //correspondes to an error message that wil lbe displayed
+
+            //Checks to see if any feild in the form is empty
             if(empty($firstname) || empty($surename) || empty($email) || empty($username) || empty($password) || empty($rePassword)){
                 $this->console_log("Feilds left empty!");
                 return 1;
             }
 
+            //Checks to see if Email is valid
             if((strpos($email, '@') || strpos($email, '.') || filter_var($email, FILTER_VALIDATE_EMAIL)) == false){
                 $this->console_log("Email invalid");
                 return 2;
             }
 
+            //Checks to see if password is valid (contains the right amount of characters and some specail characters too)
             if((strlen($password) < 8) || (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-].*[0-9]|[0-9]/', $password)) == false){
                 $this->console_log("password invalid");
                 return 3;
             }
 
+            //Checks to see if the retyped password feild matches the password feild
             if($password != $rePassword){
                 $this->console_log("passwords don't match");
                 return 4;
             }
 
+            //Checks to see if the username the user has selected to register with is unique (if it's in use)
             $sqlCheckUser = $this->makeQuery("SELECT * FROM Accounts;");
             if ($sqlCheckUser != NULL) {
-
                 $userExists = false;
                 while($rows = mysqli_fetch_array($sqlCheckUser)) {
                     if($username == $rows["username"]){
-                        $userExists = true;
+                        $this->console_log("User Exists");
+                        return 5;
                     }
                 }
-
-                if($userExists == true){
-                    $this->console_log("User Exists");
-                    return 5;
-                }
             }
+            //Catchs SQL error and logs it
             else {
                 $this->console_log("SQLCheckerFailed!");
                 return 6;
             } 
+
+            //If not errors have been found with the inputed information, it is stored in the database via SQL
             $sql =  "INSERT INTO Accounts (email,username,password,firstname,surename,userType) 
                     VALUES ('$email','$username', '$password', '$firstname', '$surename', '$userType');";
             $this->makeQuery($sql);
-            return 0;
 
-            //allocating user storage on server
-            $pathnameAlevel = $_SERVER['DOCUMENT_ROOT'] . '/Study-Share/src/users/' .$userName . '/A-Level';
-            $pathnameGCSE = $_SERVER['DOCUMENT_ROOT'] . '/Study-Share/src/users/' .$userName . '/GCSE';
+            //Creates a path for allocating user storage on server - with a GCSE and A-level folder for each user
+            $pathnameAlevel = $_SERVER['DOCUMENT_ROOT'] . '/Study-Share/src/users/' .$username . '/A-Level';
+            $pathnameGCSE = $_SERVER['DOCUMENT_ROOT'] . '/Study-Share/src/users/' .$username . '/GCSE';
             console_log($pathnameAlevel);
             console_log($pathnameGCSE);
 
-            if(mkdir($pathnameAlevel,0777,true)){
+            //creates a folder in the server in the previously specified path for the specific user
+            if(mkdir($pathnameAlevel,0777,true) && mkdir($pathnameGCSE,0777,true)){
                 console_log("sucessful");
             }
             else{
                 console_log("unsucessful file creation for a level");
             }
 
-            if(mkdir($pathnameGCSE,0777,true)){
-                console_log("sucessful");
-            }
-            else{
-                console_log("unsucessful file creation for gcse");
-            }
-
-            session_start();
-            $_SESSION['loggedIn'] = true;
-            $_SESSION['username'] = $userName;
+            //Once the user registers they are logged in 
+            $this->searchUser($username, $password);
+            return 0;
         }
 
-        public function storePost($postTitle,$subject,$ownerID,$eduLevel,$path){
-            $sql = "INSERT INTO Posts (ownerID, title, subject, educationLevel, path) VALUES ('$ownerID','$postTitle','$subject','$eduLevel','$path')";
-            if(mysqli_query($this->conn,$sql)){
+        //Stores user post in their desginated folder
+        public function storePost($postTitle, $subject, $ownerID, $eduLevel, $path, $fileName){
+            //Inserts information about the post in the "post" table
+            //The system only stores the path of the folder in the server in the database, not the file's info
+            $sql = "INSERT INTO posts (ownerID, title, subject, educationLevel, path) 
+                    VALUES ('$ownerID','$postTitle','$subject','$eduLevel','$path')";
+            if($this->makeQuery($sql) != NULL){
                 console_log("post stored");
             }
             else{
                 console_log("post not stored");
+                return false;
             };
 
+            //The table store post with an incremented value for each one, this returns it once it's inserted in the the db
             $postID = mysqli_insert_id($this->conn);
-
-            $updatedPath = $path . '/' . $postID;
-
-            $sqlUpdatePath = "UPDATE Posts SET path = '$updatedPath'";
-            mysqli_query($this->conn,$sqlUpdatePath);
+            //The file name is appended to the path to give the completelocation of the file rather than it's directory 
+            $updatedPath = $path . '/' . $postID .'/' . $fileName;
+            $sqlUpdatePath = "UPDATE Posts SET path = '$updatedPath' WHERE postID = '$postID'";
+            $this->makeQuery($sqlUpdatePath);
             return $postID;
         }
 
 
-
         //Extra function -----------------------------------------------------------------//
+
+        //This function is to make javascript print out errors/relevant info with sepcifed messages on the console
+        public function console_log($data) {
+            echo '<script>';
+            echo 'console.log('. json_encode( $data ) .')';
+            echo '</script>';
+        } 
+
+        //Carries out query but also prints error messages for debuging purposes
         public function makeQuery($Query){
             $Q = mysqli_query($this->conn, $Query);
             if($Q == False) {
@@ -154,16 +180,12 @@
             }
         }
 
-        public function console_log($data) {
-            echo '<script>';
-            echo 'console.log('. json_encode( $data ) .')';
-            echo '</script>';
-        } 
-
+        //Returns connection to the database
         public function getConnection() {
             return $this->conn;
         }
 
+        //Logins in an out users with appropriate actions taken to set and unset a session
         public function LogInOut($InOrOut) {
             if($InOrOut){
                 $this->console_log("Logged in!");
@@ -180,11 +202,24 @@
             }
         }
 
-        public function getUserID($userName){
+        //Gets GCSE post entries on DB
+        public function getGCSEPosts(){
+            $sql = mysqli_query($this->conn,"SELECT * FROM Posts WHERE educationLevel='GCSE'");
+            return $sql;
+        }
+
+        //Gets A-Level post entries on DB
+        public function getALevelPosts(){
+            $sql = mysqli_query($this->conn,"SELECT * FROM Posts WHERE educationLevel='A-Level'");
+            return $sql;
+        }
+
+        //Get's user's numenrical ID
+        public function getUserID($username){
             $sql = mysqli_query($this->conn, "SELECT * FROM Accounts WHERE username = '$username'");
             $row = mysqli_fetch_array($sql);
             $userID = $row['userID'];
             return $userID;
         }
-    }//end class
+    }
 ?>	

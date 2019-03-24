@@ -8,14 +8,14 @@
         private $eduLevel;
         private $subject;
         
-        public $userName;
+        public $username;
 
         public function __construct($filename,$filesize,$filetype,$filetmp,$user){
             $this->file_name = $filename;
             $this->file_size = $filesize;
             $this->file_type = $filetype;
             $this->file_tmp = $filetmp;
-            $this->userName = $user;
+            $this->username = $user;
         }
 
         public function getFileTmp(){
@@ -27,7 +27,7 @@
         }
 
         public function getDocumentOwner(){
-            return $this->userName;
+            return $this->username;
         }
     }
        

@@ -9,11 +9,11 @@ class Guest {
         mysqli_close($con);
     }
     
-    public function login($userName, $password) {
+    public function login($username, $password) {
         $dataInterfaceObj = DataInterface::getInstance();
     
         //Checks if account exists, true or false
-        $LoginResults = $dataInterfaceObj->searchUser($userName,$password);
+        $LoginResults = $dataInterfaceObj->searchUser($username,$password);
         return  $LoginResults;
 
     }
