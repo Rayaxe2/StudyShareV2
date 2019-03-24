@@ -24,8 +24,8 @@
         <li id="Uploadbtn" style="float:right"></li>
       </ul>
     </div>
+    
   </form>
-
     <center>
         <div class="UserPageDiv" style="width:600px;">
             <form action="NewPass.php" method ="post" class="formbody" >

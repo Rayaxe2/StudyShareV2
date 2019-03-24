@@ -30,6 +30,11 @@ else {
     if ($result){
         //redirct with confirmation message
         $RegisteredUserObj->console_log("Success changing password!");
+        echo "<script>
+            if (!alert('Password Successfully changed! Redirecting you to your user page.')){
+                window.location.href = 'http://localhost/Study_Share_v2/src/UserPage.php';
+            }
+        </script>";
     }
     else {
         //error

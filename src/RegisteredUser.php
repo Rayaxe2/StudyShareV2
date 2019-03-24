@@ -15,49 +15,48 @@ class RegisteredUser{
     }
 
     public function createNewPost($file_name,$file_size,$file_type,$file_tmp,$postTitle,$eduLevel,$subject){
-        console_log("works");
-        $fileObj = new Document($file_name,$file_size,$file_type,$file_tmp,$username);
+        console_log($eduLevel);
+        $fileObj = new Document($file_name,$file_size,$file_type,$file_tmp,$this->username);
+        $targetDir = $_SERVER['DOCUMENT_ROOT'] . '/Study_Share_v2/src/users/' . $fileObj->getDocumentOwner();
+        $targetFile = $targetDir;
 
-    $targetDir = $_SERVER['DOCUMENT_ROOT'] . '/Study-Share/src/users/' . $fileObj->getDocumentOwner();
-    $targetFile = $targetDir;
+        if($eduLevel == "A-Level"){
+            $targetFile = $targetFile . '/' . "A-Level";
+        }
+        else{
+            $targetFile = $targetFile . '/' . "GCSE";
+        }
+        
+        //$targetFile = $targetFile.'/'.$fileObj->getFileName();
+        $dataInterfaceObj = DataInterface::getInstance();
+        $userID = $dataInterfaceObj->getUserID($this->username);
+        $postID = $dataInterfaceObj->storePost($postTitle,$subject,$userID,$eduLevel,$targetFile,$file_name);
 
-    if($eduLevel == "A-Level"){
-        $targetFile = $targetFile . '/' . "A-Level";
-    }
-    else{
-        $targetFile = $targetFile . '/' . "GCSE";
-    }
-    
-    //$targetFile = $targetFile.'/'.$fileObj->getFileName();
-    $dataInterfaceObj = DataInterface::getInstance();
-    $userID = $dataInterfaceObj->getUserID($username);
-    $postID = $dataInterfaceObj->storePost($postTitle,$subject,$userID,$eduLevel,$targetFile);
+        $targetFile = $targetFile .'/' . $postID;
 
-    $targetFile = $targetFile .'/' . $postID;
+        $postObj = new Post($postID, $userID);
+        $postObj->setTitle($postTitle);
+        $postObj->setSubject($subject);
+        $postObj->setEducationLevel($eduLevel);
 
-    $postObj = new Post($postID, $userID);
-    $postObj->setTitle($postTitle);
-    $postObj->setSubject($subject);
-    $postObj->setEducationLevel($eduLevel);
+        console_log($targetFile);
 
-    console_log($targetFile);
+        $oldmask = umask(0);
+        if(mkdir($targetFile,0777,true)){
+            console_log("file made");
+        }
+        else{
+            console_log("file not made");
+        }
+        umask($oldmask);
 
-    $oldmask = umask(0);
-    if(mkdir($targetFile, 0777)){
-      console_log("file made");
-    }
-    else{
-      console_log("file not made");
-    }
-    umask($oldmask);
-
-    $targetFile = $targetFile . '/' . $fileObj->getFileName();
-    if(move_uploaded_file($fileObj->getFileTmp(),$targetFile)){
-        console_log("sucessful");
-    }
-    else{
-        console_log("did not upload");
-    }
+        $targetFile = $targetFile . '/' . $fileObj->getFileName();
+        if(move_uploaded_file($fileObj->getFileTmp(),$targetFile)){
+            console_log("sucessful upload");
+        }
+        else{
+            console_log("did not upload");
+        }
     
     }
 

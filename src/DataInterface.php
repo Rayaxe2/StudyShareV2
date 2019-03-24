@@ -33,7 +33,7 @@
         
         //Searches for a username in the database and check to see if the password matches to be able to log the user in
         public function searchUser($username, $password){
-            //The username feild is a primary key in the table 
+            //The username feild is a unique feild with no repetition (key) in this table 
             //so there is no need to search more than 1 record from the returned results of this SQL query - only 1 is returned
             $Query = $this->makeQuery("SELECT * FROM Accounts WHERE username = '$username';");
             $CheckQuery = mysqli_num_rows($Query);
@@ -41,6 +41,9 @@
             if($CheckQuery == 1) {
                 $row = mysqli_fetch_assoc($Query);
                 if($password == $row["password"]){
+                        if(isset($_SESSION) == false){
+                            session_start();
+                        }
                         $_SESSION['username'] = $username;
                         $_SESSION['userType'] = $row["userType"];
                         $_SESSION['firstname'] = $row["firstname"];
@@ -117,20 +120,20 @@
             //Creates a path for allocating user storage on server - with a GCSE and A-level folder for each user
             $pathnameAlevel = $_SERVER['DOCUMENT_ROOT'] . '/Study-Share/src/users/' .$username . '/A-Level';
             $pathnameGCSE = $_SERVER['DOCUMENT_ROOT'] . '/Study-Share/src/users/' .$username . '/GCSE';
-            console_log($pathnameAlevel);
-            console_log($pathnameGCSE);
+            $this->console_log($pathnameAlevel);
+            $this->console_log($pathnameGCSE);
 
             //creates a folder in the server in the previously specified path for the specific user
             if(mkdir($pathnameAlevel,0777,true) && mkdir($pathnameGCSE,0777,true)){
-                console_log("sucessful");
+                $this->console_log("sucessful");
             }
             else{
-                console_log("unsucessful file creation for a level");
+                $this->console_log("unsucessful file creation for a level");
             }
 
             //Once the user registers they are logged in 
             $this->searchUser($username, $password);
-            return 0;
+            return 7;
         }
 
         //Stores user post in their desginated folder
@@ -140,10 +143,10 @@
             $sql = "INSERT INTO posts (ownerID, title, subject, educationLevel, path) 
                     VALUES ('$ownerID','$postTitle','$subject','$eduLevel','$path')";
             if($this->makeQuery($sql) != NULL){
-                console_log("post stored");
+                $this->console_log("post stored");
             }
             else{
-                console_log("post not stored");
+                $this->console_log("post not stored");
                 return false;
             };
 
@@ -188,17 +191,18 @@
         //Logins in an out users with appropriate actions taken to set and unset a session
         public function LogInOut($InOrOut) {
             if($InOrOut){
-                $this->console_log("Logged in!");
                 $_SESSION['loggedIn'] = true;
+                $this->console_log("Logged in!");
             }
             elseif($InOrOut == false){
-                session_start();
-                session_unset();
-                session_destroy();
-                console_log("Logged out");
+                if(isset($_SESSION)){
+                    session_unset();
+                    session_destroy();
+                }
+                $this->console_log("Logged out");
             }
             else {
-                console_log("Login/out error");
+                $this->console_log("Login/out error");
             }
         }
 

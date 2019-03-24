@@ -40,7 +40,8 @@ function upload($file_name,$file_size,$file_type,$file_tmp,$postTitle,$subject){
         $targetFile = $targetFile . "gcse";
     }
 
-    $targetFile = $targetFile.'
+    //issue here
+    $targetFile = $targetFile.
 
     mkdir($targetFile, 0777);
 

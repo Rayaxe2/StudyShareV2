@@ -1,7 +1,11 @@
 <?php 
 include 'RegisteredUser.php';
+include_once 'index.html';
 
-session_start();
+if(isset($_SESSION) == false){
+  session_start();
+}
+
 console_log($_SESSION);
 $loginbtn;
 $uploadBtn;
@@ -29,7 +33,6 @@ if(isset($_SESSION['loggedIn'])){
   $uploadBtn = "<a href=addpost.html>Upload Notes</a>"; 
   console_log("Logged out button selected");
 
-include_once 'index.html';
  echo "<script>
     document.getElementById('loginbtn').remove;
     document.getElementById('LoginButton').innerHTML='$loginbtn';
@@ -37,6 +40,7 @@ include_once 'index.html';
     document.getElementById('UserPageIcon').innerHTML='$UserIcon';
   </script>";
 }
+
 else{
   $loginbtn = '<button class="btn" name="login" id="loginbtn" style="width:250px;">Login/SignUp</button>';
   $UserIcon = '';
@@ -52,15 +56,5 @@ function console_log( $data ){
   echo 'console.log('. json_encode( $data ) .')';
   echo '</script>';
 }
-  
-include_once 'index.html';
-/*
-if(isset($_SESSION['loggedIn'])){
-  echo "<script>
-    document.getElementById('loginbtn').remove;
-    document.getElementById('LoginButton').innerHTML='$loginbtn';
-    document.getElementById('Uploadbtn').innerHTML='$uploadBtn';
-  </script>";
-}
-*/
+
 ?>

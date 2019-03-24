@@ -13,8 +13,7 @@
         $guestObj = new Guest;
         $RegResults = $guestObj->register($email, $username, $password, $firstname, $surename, $userType, $rePassword);
 
-        echo $RegResults;
-        if ($RegResults != 0) {
+        if ($RegResults != 7) {
             include_once 'login.html';
             echo "<script>
             var ErrorSection = document.getElementById('RegisterError');
@@ -49,44 +48,19 @@
                 document.getElementById('Regsname').value = '$surename';
                 document.getElementById('Regpsw').value = '$password';
                 document.getElementById('Regpsw-repeat').value = '$rePassword';";
-
-            /*old version
-            echo "document.getElementById('Regemail').value = '$email';
-                document.getElementById('Regemail').style.borderColor = 'red';
-
-                document.getElementById('Regusername').value = '$username';
-                document.getElementById('Regusername').style.borderColor = 'red';
-
-                document.getElementById('Regfname').value = '$firstname';
-                document.getElementById('Regfname').style.borderColor = 'red';
-
-                document.getElementById('Regsname').value = '$surename';
-                document.getElementById('Regsname').style.borderColor = 'red';
-
-                document.getElementById('Regpsw').value = '$password';
-                document.getElementById('Regpsw').style.borderColor = 'red';
-
-                document.getElementById('Regpsw-repeat').value = '$rePassword';
-                document.getElementById('Regpsw-repeat').style.borderColor = 'red';";
-            */
-                
-        
-        echo "</script>";
-
-        //setcookie("username", $username, time() + (86400 * 30), "/"); 
-        //setcookie("password", $password, time() + (86400 * 30), "/"); 
-
+            echo "</script>";
         }
+
         else {
-            header("Location: ./index.html");
+            console_log($_SESSION);
+            header("Location: ./index.php");
         }
     }
 
-    /*
-    <script>
-            var ErrorSection = document.getElementById('RegisterError');
-            ErrorSection.style.color = 'red';
-            document.getElementById('psw-repeat').text = '$rePassword';
-    </script>
-    */
+    function console_log($data){
+        echo '<script>';
+        echo 'console.log('. json_encode( $data ) .')';
+        echo '</script>';
+    }
+
 ?>

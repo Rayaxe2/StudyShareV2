@@ -36,7 +36,6 @@
                           <button class="dropbtn">Account Settings    <i class="fa fa-angle-down"></i></button></button>
                           <div class="dropdown-content">
                               <a href="changePassword.php">Change password</a>
-                              <!--<a href="#">Link 2</a>-->
                           </div>
                         </div> 
                     <td>
