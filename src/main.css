@@ -217,10 +217,6 @@ span.psw {
   padding: 10px;
 }
 
-.UserPostSection{
-
-}
-
 .PostGrid{
   display: grid;
   grid-template-columns: auto auto auto;

@@ -1,15 +1,7 @@
 <?php
-  include 'DataInterface.php';
-
+  include_once 'DataInterface.php';
   $dataInterfaceObj = DataInterface::getInstance();
   $posts = $dataInterfaceObj->getALevelPosts();
-
-  function console_log( $data ){
-      echo '<script>';
-      echo 'console.log('. json_encode( $data ) .')';
-      echo '</script>';
-  }
-
 ?>
 
 <!DOCTYPE html>
@@ -51,19 +43,16 @@
 </html>
 
 <?php
-include_once "NavBarState.php";
+  include_once "NavBarState.php";
 
-echo '
-    <div class="UserPageDiv" style="padding-top: 20px;">';
-    while($rows = mysqli_fetch_array($posts)) {
-        echo'<div class="large-grid-item"><table><tr><td>'.$rows["title"].'</td></tr>
-        <tr><td>upvote stuff</td></tr>
-        <tr><td>';
-        echo '<a href="download.php?file='.$rows["path"].'">Download Notes here</a>';
-        echo '</td></tr></table></div>';
-
-    }
+  echo '<div class="UserPageDiv" style="padding-top: 20px;">';
+  while($rows = mysqli_fetch_array($posts)) {
+    echo'<div class="large-grid-item"><table><tr><td>'.$rows["title"].'</td></tr>
+    <tr><td>upvote stuff</td></tr>
+    <tr><td>';
+    echo '<a href="download.php?file='.$rows["path"].'">Download Notes here</a>';
+    echo '</td></tr></table></div>';
+  }
 
   echo '</body></html>';
-//include_once 'gcse.html';
 ?>

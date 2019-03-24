@@ -1,6 +1,5 @@
 <?php 
 include 'DataInterface.php';
-
 class Guest {
     public function register($email, $username, $password, $firstname, $surename, $userType, $rePassword) {
         $dataInterfaceObj = DataInterface::getInstance();
