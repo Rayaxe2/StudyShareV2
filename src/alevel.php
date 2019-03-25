@@ -1,7 +1,6 @@
 <?php
   //Gets a Datainterface object to interact with the DB
   include_once 'DataInterface.php';
-  include_once 'NavBarState.php';
   $dataInterfaceObj = DataInterface::getInstance();
   //Gets every A-Level post
   $posts = $dataInterfaceObj->getALevelPosts();
@@ -89,3 +88,7 @@
     </center>
   </body>
 </html>
+
+<?php
+  include_once 'NavBarState.php';
+?>
