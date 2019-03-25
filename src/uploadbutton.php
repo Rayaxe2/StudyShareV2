@@ -1,6 +1,7 @@
 <?php 
 include_once 'Document.php';
 
+
 if(isset($_FILES['uploadfile']))
 {
     $file_name = $_FILES['uploadfile']['name'];
@@ -31,7 +32,7 @@ function upload($file_name,$file_size,$file_type,$file_tmp,$postTitle,$subject){
     }
 
     //issue here
-    $targetFile = $targetFile.
+    $targetFile = $targetFile;
 
     mkdir($targetFile, 0777);
 

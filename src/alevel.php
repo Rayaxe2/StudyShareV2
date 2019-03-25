@@ -1,6 +1,7 @@
 <?php
   //Gets a Datainterface object to interact with the DB
   include_once 'DataInterface.php';
+  include_once 'NavBarState.php';
   $dataInterfaceObj = DataInterface::getInstance();
   //Gets every A-Level post
   $posts = $dataInterfaceObj->getALevelPosts();
@@ -11,7 +12,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>GCSE Posts</title>
+    <title>A-Levels Posts</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="main.css" />
@@ -32,7 +33,7 @@
   </form>
       
       <div class="edutitle">
-        <p>GCSE</p>
+        <p>A-levels</p>
       </div>
       <div class="subBody"></div>
 
@@ -88,7 +89,3 @@
     </center>
   </body>
 </html>
-
-<?php
-  //Changes nav bar based on login state
-  include_once 'NavBarState.php';

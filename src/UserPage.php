@@ -61,7 +61,6 @@
                 </tr>
             </table>
         </div>
-
         <!--
         <div class="UserPageDiv" style="padding-top: 20px;">
           <div class="PostGrid" style="box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);">
@@ -76,6 +75,7 @@
 </html>
 
 <?php
+  //Displays user information on the user page 
   $username = $_SESSION['username'];
   $firstname = $_SESSION['firstname'];
   $surename = $_SESSION['lastname'];
