@@ -42,7 +42,7 @@
                 </tr>
                 
                 <tr>
-                    <td><img src="DefaultProfilePic.png"/></td>
+                    <td><img src="./Images/DefaultProfilePic.png"/></td>
                     <td valign="top">
                         <table class="UserInfo">
                         <tr>

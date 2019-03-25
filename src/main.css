@@ -8,23 +8,9 @@
   margin-right: 5px;
   font-style: italic;
 }
-.ques {
-  text-align: center;
-  font-size: 65px;
-  border-radius: 10px;
-  margin-left: 10%;
-
-  width: 80%;
-
-  margin-top: 5%;
-
-  color: white;
-  padding-top: 1px;
-  padding-bottom: 1px;
-  background-image: -webkit-linear-gradient(135deg, #13547a, #80d0c7);
-}
 
 .navbar ul {
+  height: 56px;
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -56,27 +42,22 @@
 /** Body **/
 
 body {
-  background-image: url("./background.png");
+  background-image: url("./Images/background.png");
   padding: 0px;
 }
-/*.wrapper {
-  text-align: center;
-}*/
-
 
 /*Buttons*/
 .button {
-  width: 330px; 
+  width: 95%;
+  height: 90%; 
   font-size: 70px;
   padding: 15px 25px;
-
   cursor: pointer;
   text-align: center;
-
   color: #fff;
-  background-color: #13547a;
+  background-color: rgba(100, 100, 100, 0.95);
   border: none;
-  border-radius: 15px;
+  border-radius: 5px;
 }
 
 .button:hover {
@@ -88,10 +69,6 @@ body {
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
-
-/*.active {
-    background-color: #4CAF50;
-  }*/
 
 
 /* CSS FOR LOGIN PAGE */
@@ -129,7 +106,7 @@ body {
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;
-    margin: 8px 0;
+    margin: 6px;
     border: none;
     cursor: pointer;
     width: 410px;
@@ -206,6 +183,19 @@ span.psw {
   padding: 20px;
   min-width: 500px;
   width: 80%;
+}
+
+.DefaultTable{
+  background-color: rgba(255,255,255,0.96);
+  padding: 1px;
+  min-width: 500px;
+  width: 80%;
+  text-align: center;
+  font-size: 65px;
+  border-radius: 3px;
+  color: black;
+  margin-top: 106px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .UserInfo{
@@ -286,6 +276,24 @@ span.psw {
   padding: 20px;
   font-size: 30px;
   text-align: center;
+}
+
+.VoteButtons{
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  text-align: center;
+  display: inline-block;
+  font-size: 20px;
+  margin: 4px;
+  padding: 10px;
+  border-radius: 50%;
+  width:40px;
+  height: 40px;
+}
+
+img {
+  size: 100%;
 }
 
 

@@ -1,5 +1,7 @@
 <?php
+    //Stores file infomation in an object format
     class Document {
+        //File info
         private $file_name;
         private $file_size;
         private $file_type;
@@ -10,6 +12,7 @@
         
         public $username;
 
+        //Intialises object
         public function __construct($filename,$filesize,$filetype,$filetmp,$user){
             $this->file_name = $filename;
             $this->file_size = $filesize;
@@ -18,6 +21,7 @@
             $this->username = $user;
         }
 
+        //Getters for the object
         public function getFileTmp(){
             return $this->file_tmp;
         }

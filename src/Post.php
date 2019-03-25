@@ -1,4 +1,5 @@
 <?php
+    //Stores infomration about the post to later use
     class Post{
         private $postID;
         private $ownerID;
@@ -11,6 +12,7 @@
             $this->ownerID = $ownerid;
         }
 
+        //Setters and getters to access the variables in the object 
         public function setTitle($value){
             $this->title = $value;
         }
